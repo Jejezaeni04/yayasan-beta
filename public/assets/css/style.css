@@ -1,0 +1,14 @@
+.list-active a {
+    position: relative; /* Positioning for the pseudo-element */
+    color: #ffff; /* Change text color if needed */
+}
+
+.list-active a::after {
+    content: ""; /* Necessary for the pseudo-element */
+    position: absolute;
+    left: 0; /* Align with the left edge */
+    right: 0; /* Align with the right edge */
+    bottom: -2px; /* Position it below the text */
+    height: 2px; /* Height of the underline */
+    background-color: #ffff; /* Color of the underline */
+}
