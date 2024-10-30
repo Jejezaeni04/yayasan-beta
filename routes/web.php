@@ -35,6 +35,15 @@ Route::get('/dashboard', function () {
     return view('user.dashboard');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/test1', function () {
+    return view('test1');
+});
+
+
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('user.dashboard')->middleware(UserMiddleware::class);
