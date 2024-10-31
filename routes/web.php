@@ -12,17 +12,37 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
-Route::prefix('admin')->name('admin.')->group(function(){
-    Route::middleware(['auth',AdminMiddleware::class])->group(function(){
-        Route::get('/dashboard', [App\Http\Controllers\admin\AdminHomeController::class, 'dashboard'])->name('dashboard');
-        Route::controller(programController::class)->group(function(){
-            Route::get('/program','programIndex')->name('program');
-            Route::get('/program/addProgram','addProgram')->name('addProgram');
-        
-        });
-        // Route::get('/program',[HomeController::class,'programIndex'])->name('program');
-    });
+Route::controller(programController::class)->group(function(){
+    Route::get('/program','programIndex')->name('program');
+    Route::get('/program/addProgram','addProgram')->name('addProgram');
+
 });
+
+Route::get('/register', function () {
+    return view('user.register');
+});
+
+Route::get('/reset', function () {
+    return view('user.reset');
+});
+
+
+Route::get('/login', function () {
+    return view('user.login');
+});
+
+Route::get('/dashboard', function () {
+    return view('user.dashboard');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/test1', function () {
+    return view('test1');
+});
+
 
 Auth::routes();
 
