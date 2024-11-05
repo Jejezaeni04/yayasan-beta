@@ -31,7 +31,9 @@
       background-color: #0A3D72;
       color: white;
       padding: 40px 0;
+
       text-align: start;
+
     }
     .footer h2 {
       font-size: 24px;
@@ -300,8 +302,10 @@
                 <img src="{{ url('image/peresmian2.png') }}" alt="Dokumentasi Peresmian 2" class="card-img-top centered-img" style="max-width: 35%; height: auto;">
               </div>
             </div>
+
           </div>
           </div>
+
 
           <div class="carousel-item">
               <div class="container text-center">
@@ -470,6 +474,7 @@
           <p class="mb-1 fw-bold">User</p>
           <p class="mb-1 fw-bold" style="font-size: 1.1rem;">Sangat luar biasa</p>
           <p class="mb-1 text-muted">Agustus 2024</p>
+
         </div>
       </div>
       <p class="mt-3">
@@ -500,6 +505,7 @@
 
           
         </div>
+
 
        
 

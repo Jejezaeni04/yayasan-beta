@@ -22,6 +22,7 @@ Route::controller(landingpageController::class)->group(function(){
     Route::get('/','index')->name('/');
 });
 
+
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth',AdminMiddleware::class])->group(function(){
 
@@ -71,7 +72,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::post('/simpanKandidat','store')->name('kandidatStore');
         });
     });
-});
+
 
 Auth::routes();
 
