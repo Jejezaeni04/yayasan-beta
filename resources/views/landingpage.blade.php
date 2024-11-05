@@ -31,7 +31,9 @@
       background-color: #0A3D72;
       color: white;
       padding: 40px 0;
-      text-align: center;
+
+      text-align: start;
+
     }
     .footer h2 {
       font-size: 24px;
@@ -300,8 +302,10 @@
                 <img src="{{ url('image/peresmian2.png') }}" alt="Dokumentasi Peresmian 2" class="card-img-top centered-img" style="max-width: 35%; height: auto;">
               </div>
             </div>
+
           </div>
           </div>
+
 
           <div class="carousel-item">
               <div class="container text-center">
@@ -470,6 +474,7 @@
           <p class="mb-1 fw-bold">User</p>
           <p class="mb-1 fw-bold" style="font-size: 1.1rem;">Sangat luar biasa</p>
           <p class="mb-1 text-muted">Agustus 2024</p>
+
         </div>
       </div>
       <p class="mt-3">
@@ -501,6 +506,7 @@
           
         </div>
 
+
        
 
 
@@ -523,20 +529,9 @@
             <div class="col-md-8 mx-auto">
                 <h1 class="display-2 text-white font-weight-bold">Sedekah Rp3.000 Anda, Harapan Baru</h1>
                 <p class="lead text-white">Berbagilah untuk mereka yang membutuhkan saat mereka kelaparan.</p>
-                <button class="btn btn-lg btn-outline-light bg-primary">Donasi Sekarang</button>
+                <a href="#programKami" class="btn btn-lg btn-outline-light bg-primary">Donasi Sekarang</a>
             </div>
         </div>
-    </div>
-
-    <div class="container mt-lg-5">
-      <div class="row">
-        <div class="col">
-          1 of 2
-        </div>
-        <div class="col">
-          2 of 2
-        </div>
-      </div>
     </div>
     
  <div class="container hero-section">
@@ -552,7 +547,7 @@
 <!-- Programs Section -->
     <section class="programs-section">
         <div class="container">
-            <h2 class="text-start mb-5">Program Kami</h2>
+            <h2 class="text-start mb-5" id="programKami">Program Kami</h2>
             <div class="row">
                 <!-- Program 1 -->
                 <div class="col-md-4 mb-4">
