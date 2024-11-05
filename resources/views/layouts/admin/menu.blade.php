@@ -3,10 +3,10 @@
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" href="{{url('image/yayasan.png')}}" type="image/png">
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Yayasan - Gita Cahaya Karsa Putri Pasundan </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -48,16 +48,22 @@
                             <p class=" ml-3 fw-bold" >Manajemen Program</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('admin.galeri')) ? 'list-active' : ''}}">
+                        <a href="{{route('admin.galeri')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/list.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Konten</p>
+                            <p class=" ml-3 fw-bold" >Manajemen Galeri</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('admin.pembayaran')) ? 'list-active' : ''}}">
+                        <a href="{{route('admin.pembayaran')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/online-payment.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Pembayaran</p>
+                        </a>
+                    </li>
+                    <li class="{{ (Route::is('admin.kandidat')) ? 'list-active' : ''}}">
+                        <a href="{{route('admin.kandidat')}}" class="d-flex align-items-center">
+                            <img src="{{ url('image/icons/hire-white.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
+                            <p class=" ml-3 fw-bold" >Manajemen Kandidat</p>
                         </a>
                     </li>
                     <li class="">
@@ -79,7 +85,7 @@
                             <img src="{{ url('image/icons/logout (2).png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                         <p class=" ml-3 fw-bold" >Log-Out</p>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -98,6 +104,7 @@
         </div>
         
         @yield('content')
+        @include('sweetalert::alert')
     </div>
 </body>
 <!--   Core JS Files   -->

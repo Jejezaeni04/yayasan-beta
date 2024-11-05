@@ -30,32 +30,14 @@
                 </div>
             </div>
         </div>
-        <div class="container mt-4">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <i class="bi bi-people-fill fs-1 text-success"></i>
-                    <h5 class="card-title">Total Pengunjung</h5>
-                    <p class="card-text">5.325</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <i class="bi bi-coin fs-1 text-warning"></i>
-                    <h5 class="card-title">Total Donasi</h5>
-                    <p class="card-text">Rp 24.456.789</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
     </div>
-    <div class="d-flex justify-content-end align-items-end mr-5">
-      <button type="button" class="btn btn-outline-secondary rounded-lg"><i class="bi bi-plus-circle mr-2"></i>Tambah</button>
-    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="fs-5 fw-bold mb-0 ml-4">Konten</p>
+      <a href="{{route('admin.addKonten')}}" class="btn btn-primary rounded-lg mr-4">
+          <i class="bi bi-plus-circle mr-2"></i>Tambah
+      </a>
+  </div>
+  
     <div class="container">
       <table class="table table-striped table-bordered">
         <thead class=" table-secondary">
@@ -67,30 +49,73 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="d-flex justify-content-center align-items-center">
-                <img src="{{ url('image/img11.jpeg') }}" alt="Program 1" width="100">
+          @foreach ($konten as $item)
+            <tr>
+              <td>
+                <div class="d-flex justify-content-center align-items-center">
+                  <img src="{{ asset('storage/' . $item->fotoKonten) }}" alt="{{ $item->judulKonten }}" alt="Program 1" width="100">
+                </div>
+              </td>
+              <td>{{ $item->judulKonten }}</td>
+              <td>
+                <div class="d-flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">
+                      Detail
+                  </button>
               </div>
-            </td>
-            <td>Program makan untuk 99 orang manusia gerobak</td>
-            <td>
-              <div class="d-flex justify-content-center align-items-center">
-                <a href="#" class="btn btn-link">Detail</a>
-              </div>
-            </td>
-            <td >
-              <div class="d-flex justify-content-center align-items-center">
-                <a href="#" class="btn btn-primary mr-2">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
+              </td>
+              <td >
+                <div class="d-flex justify-content-center align-items-center">
+                  <a href="{{route('admin.editKonten',$item->id)}}" class="btn btn-primary mr-2">Edit</a>
+                  <a href="/admin/deleteKonten/{{$item->id}}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                </div>
+              </td>
             </tr>
+
+            <!-- Modal -->
+              <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailModalLabel">{{$item->judulKonten}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Deskripsi:</strong> {{$item->detailKonten}}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>  
+          @endforeach
         </tbody>
       </table>
+        <nav aria-label="Page navigation example" class=" d-flex justify-content-center align-items-center">
+          <ul class="pagination ">
+              {{-- Previous Page Link --}}
+              <li class="page-item {{ $konten->onFirstPage() ? 'disabled' : '' }}">
+                  <a class="page-link" href="{{ $konten->previousPageUrl() }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                  </a>
+              </li>
+              {{-- Pagination Elements --}}
+              @foreach ($konten->getUrlRange(1, $konten->lastPage()) as $page => $url)
+                  <li class="page-item {{ $page == $konten->currentPage() ? 'active' : '' }}">
+                      <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                  </li>
+              @endforeach
+              {{-- Next Page Link --}}
+              <li class="page-item {{ $konten->hasMorePages() ? '' : 'disabled' }}">
+                  <a class="page-link" href="{{ $konten->nextPageUrl() }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                  </a>
+              </li>
+          </ul>
+        </nav>
+
     </div>
 </div>
     
+
+
 @endsection

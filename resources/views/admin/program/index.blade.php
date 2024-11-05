@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end align-items-end mr-5">
-            <button type="button" class="btn btn-outline-secondary rounded-lg"><i class="bi bi-plus-circle mr-2"></i>Tambah</button>
+            <a href="{{route('admin.addProgram')}}" class="btn btn-primary rounded-lg"><i class="bi bi-plus-circle mr-2"></i>Tambah</a>
         </div>
         <div class="container">
         <table class="table table-striped table-bordered">
@@ -44,29 +44,69 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                <div class="d-flex justify-content-center align-items-center">
-                    <img src="{{ url('image/img11.jpeg') }}" alt="Program 1" width="100">
-                </div>
-                </td>
-                <td>Program makan untuk 99 orang manusia gerobak</td>
-                <td>
-                <div class="d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-link">Detail</a>
-                </div>
-                </td>
-                <td >
-                <div class="d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary mr-2">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </div>
-                </td>
-            </tr>
-            <tr>
-                </tr>
+                @foreach ($program as $item)
+                    <tr>
+                        <td>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('storage/' . $item->fotoProgram) }}" alt="{{ $item->namaProgram }}" width="100">
+                        </div>
+                        </td>
+                        <td>{{ $item->namaProgram }}</td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">
+                                    Detail
+                                </button>
+                            </div>
+                        </td>
+                        <td >
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="{{route('admin.editProgram',$item->id)}}" class="btn btn-primary mr-2">Edit</a>
+                            <a href="/admin/deleteProgram/{{$item->id}}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+
+                        </div>
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                        <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="detailModalLabel">{{$item->namaProgram}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Deskripsi:</strong> {{$item->detailProgram}}</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>  
+                @endforeach
             </tbody>
         </table>
+        <nav aria-label="Page navigation example" class=" d-flex justify-content-center align-items-center">
+            <ul class="pagination ">
+                {{-- Previous Page Link --}}
+                <li class="page-item {{ $program->onFirstPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $program->previousPageUrl() }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {{-- Pagination Elements --}}
+                @foreach ($program->getUrlRange(1, $program->lastPage()) as $page => $url)
+                    <li class="page-item {{ $page == $program->currentPage() ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                @endforeach
+                {{-- Next Page Link --}}
+                <li class="page-item {{ $program->hasMorePages() ? '' : 'disabled' }}">
+                    <a class="page-link" href="{{ $program->nextPageUrl() }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+          </nav>
         </div>
     </div>
     
