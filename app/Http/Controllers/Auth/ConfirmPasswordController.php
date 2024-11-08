@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\Support\Facades\Auth;
 
 class ConfirmPasswordController extends Controller
 {
@@ -25,8 +26,17 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
+    protected function redirectTo()
+    {
+        // Check if the user is authenticated and has the 'admin' role
+        if (Auth::check() && Auth::user()==='Admin') {
+            return '/admin/dashboard'; // Redirect to admin dashboard
+        }
+
+        return '/dashboard'; // Default redirect for other users
+    }
     /**
      * Create a new controller instance.
      *

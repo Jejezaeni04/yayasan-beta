@@ -150,7 +150,7 @@
                                         preg_match('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $item->videoKonten, $matches);
                                         $videoId = $matches[1] ?? null;
                                     @endphp
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal{{ $item->id }}">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal2{{ $item->id }}">
                                         @if($videoId)
                                             <img src="https://img.youtube.com/vi/{{ $videoId }}/0.jpg" class="card-img-top" alt="Video {{ $loop->index + 1 }}" style="cursor: pointer;">
                                         @else
@@ -159,7 +159,7 @@
                                     </a>
                                 </div>
                                 <!-- Video Modal -->
-                                <div class="modal fade" id="videoModal{{ $item->id }}" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="videoModal2{{ $item->id }}" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">

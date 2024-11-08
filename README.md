@@ -64,3 +64,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+echo "# yayasan-sss" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Jejezaeni04/yayasan-sss.git
+git push -u origin main
+
+git remote add origin https://github.com/Jejezaeni04/yayasan-sss.git
+git branch -M main
+git push -u origin main

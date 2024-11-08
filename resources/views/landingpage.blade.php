@@ -194,16 +194,19 @@
                 </div>
             </a>
             @if (Route::has('login'))
-            @auth
-                @if (Auth::user()->is_admin)
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
-                @else
-                    <a href="{{ route('user.dashboard') }}" class="btn btn-primary">Dashboard</a>
-                @endif
-            @else
-                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-            @endauth
-        @endif
+              @auth
+                  @if (Auth::user()->role === 'Admin')
+                      <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                  @elseif (Auth::user()->role === 'Kandidat')
+                      <a href="" class="btn btn-primary">Dashboard</a>
+                  @else
+                      <a href="{{ route('user.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                  @endif
+              @else
+                  <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+              @endauth
+          @endif
+
         
     </div>
 

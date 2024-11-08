@@ -16,11 +16,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->is_admin) {
+        // Check if the user is authenticated and if their role is 'Admin'
+        if (Auth::check() && Auth::user()->role === 'Admin') {
             return $next($request);
         }
 
-        abort(403,'you do not have permission');
-        
+        // If the user is not an admin, deny access with a 403 error
+        abort(403, 'You do not have permission');
     }
 }

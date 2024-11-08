@@ -40,10 +40,18 @@ class LoginController extends Controller
 
     protected function authenticated($request, $user)
     {
-        if ($user->is_admin) {
+        // Check if the user has admin privileges
+        if ($user->role === 'Admin') {
             return redirect()->route('admin.dashboard');
         }
-
+    
+        // Check if the user has kandidat privileges
+        if ($user->role === 'Kandidat') {
+            return redirect()->route('kandidat.dashboard');
+        }
+    
+        // Default to user dashboard for regular users
         return redirect()->route('user.dashboard');
     }
+    
 }

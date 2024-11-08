@@ -36,7 +36,7 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav nav-pills nav-flush flex-column mb-auto">
-                    <li class="{{ (Route::is('admin.dashboard')) ? 'list-active' : ''}}">
+                    {{-- <li class="{{ (Route::is('admin.dashboard')) ? 'list-active' : ''}}">
                         <a href="{{route('admin.dashboard')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/dashboard.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Dashboard</p>
@@ -65,7 +65,7 @@
                             <img src="{{ url('image/icons/hire-white.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Kandidat</p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="">
                         <a href="../examples/dashboard.html" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
