@@ -10,4 +10,10 @@ class UserHomeController extends Controller
     public function index(){
         return view('user.dashboard');
     }
+    public function vote(){
+        return view('user.vote');
+    }
+    public function kandidat(){
+        return view('user.daftarKandidat');
+    }
 }

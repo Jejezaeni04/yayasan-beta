@@ -25,9 +25,6 @@
 <body class="">
     <div class="wrapper ">
         <div class="sidebar" data-color="blue">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
             <div class="logo">
                 <a href="/" class="d-flex p-3 link-white text-decoration-none sidebar-title " title="Icon-only">
                     <img src="{{ url('image/icons/dashboard.png') }}" alt="" class="me-2" style="width: 24px; height: 24px;">
@@ -36,46 +33,22 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav nav-pills nav-flush flex-column mb-auto">
-                    {{-- <li class="{{ (Route::is('admin.dashboard')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.dashboard')}}" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('user.dashboard')) ? 'list-active' : ''}}">
+                        <a href="{{route('user.dashboard')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/dashboard.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Dashboard</p>
                         </a>
                     </li>
-                    <li class="{{ (Route::is('admin.program')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.program')}}" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/comsetting.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Program</p>
-                        </a>
-                    </li>
-                    <li class="{{ (Route::is('admin.galeri')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.galeri')}}" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/list.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Galeri</p>
-                        </a>
-                    </li>
-                    <li class="{{ (Route::is('admin.pembayaran')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.pembayaran')}}" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/online-payment.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Pembayaran</p>
-                        </a>
-                    </li>
-                    <li class="{{ (Route::is('admin.kandidat')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.kandidat')}}" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('user.kandidat')) ? 'list-active' : ''}}">
+                        <a href="{{route('user.kandidat')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/hire-white.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Kandidat</p>
-                        </a>
-                    </li> --}}
-                    <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Vote</p>
+                            <p class=" ml-3 fw-bold" >Daftar Kandidat</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/setting.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Manajemen Pengaturan</p>
+                    <li class="{{ (Route::is('user.vote')) ? 'list-active' : ''}}">
+                        <a href="{{route('user.vote')}}" class="d-flex align-items-center">
+                            <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
+                            <p class=" ml-3 fw-bold" > Vote</p>
                         </a>
                     </li>
                     <li class="">
@@ -90,22 +63,14 @@
                                 @csrf
                             </form>
                         </div>
-                        
                     </li>
-
-
-                    {{-- <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
-                            <img src="{{ url('image/icons/logout (2).png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Log-Out</p>
-                        </a>
-                    </li> --}}
                 </ul>
             </div>
         </div>
         
         @yield('content')
         @include('sweetalert::alert')
+
     </div>
 </body>
 <!--   Core JS Files   -->

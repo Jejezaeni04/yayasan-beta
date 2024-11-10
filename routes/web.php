@@ -77,6 +77,8 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::middleware(['auth', 'verified', UserMiddleware::class])->group(function() {
         Route::controller(UserHomeController::class)->group(function(){
             Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('/vote', 'vote')->name('vote');
+            Route::get('/kandidat', 'kandidat')->name('kandidat');
         });
     });
 });
