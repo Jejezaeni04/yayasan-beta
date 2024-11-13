@@ -13,13 +13,14 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    
     <!-- CSS Files -->
     <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{url('assets/css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{url('assets/css/style.css')}}" rel="stylesheet" />
     <link href="{{url('assets/css/now-ui-dashboard.css?v=1.0.1')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{url('assets/demo/demo.css')}}" rel="stylesheet" />
+    {{-- <link href="{{url('assets/demo/demo.css')}}" rel="stylesheet" /> --}}
 </head>
 
 <body class="">
@@ -33,20 +34,20 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav nav-pills nav-flush flex-column mb-auto">
-                    <li class="{{ (Route::is('user.dashboard')) ? 'list-active' : ''}}">
-                        <a href="{{route('user.dashboard')}}" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('kandidat.dashboard')) ? 'list-active' : ''}}">
+                        <a href="{{route('kandidat.dashboard')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/dashboard.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Dashboard</p>
                         </a>
                     </li>
-                    <li class="{{ (Route::is('user.kandidat')) ? 'list-active' : ''}}">
-                        <a href="{{route('user.kandidat')}}" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('kandidat.daftar')) ? 'list-active' : ''}}">
+                        <a href="{{route('kandidat.daftar')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/hire-white.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
-                            <p class=" ml-3 fw-bold" >Daftar Kandidat</p>
+                            <p class=" ml-3 fw-bold" >Pendaftaran</p>
                         </a>
                     </li>
-                    <li class="{{ (Route::is('user.voteHome')) ? 'list-active' : ''}}">
-                        <a href="{{route('user.voteHome')}}" class="d-flex align-items-center">
+                    <li class="">
+                        <a href="" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" > Vote</p>
                         </a>
@@ -80,6 +81,7 @@
 <!--  Google Maps Plugin    -->
 <!-- Chart JS -->
 <script src="{{url('assets/js/plugins/chartjs.min.js')}}"></script>
+<script src="{{url('js/bootstrap.min.css')}}"></script>
 <!--  Notifications Plugin    -->
 <script src="{{url('assets/js/plugins/bootstrap-notify.js')}}"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->

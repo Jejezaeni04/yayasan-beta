@@ -22,11 +22,11 @@
                 <h2>Daftar</h2>
             </a>
           </div>
-          <button class="btn google-button w-100">
+          {{-- <button class="btn google-button w-100">
             <img src="{{url('image/google.png')}}" alt="Google" width="20">
             Daftar dengan Google
           </button>
-          <p>atau daftar dengan email Anda</p>
+          <p>atau daftar dengan email Anda</p> --}}
 
           <form method="POST" action="{{ route('register') }}">
             @csrf

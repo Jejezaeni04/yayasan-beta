@@ -29,7 +29,7 @@
                   @if (Auth::user()->role === 'Admin')
                       <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
                   @elseif (Auth::user()->role === 'Kandidat')
-                      <a href="" class="btn btn-primary">Dashboard</a>
+                      <a href="{{ route('kandidat.dashboard') }}" class="btn btn-primary">Dashboard</a>
                   @else
                       <a href="{{ route('user.dashboard') }}" class="btn btn-primary">Dashboard</a>
                   @endif
@@ -95,8 +95,6 @@
             <img src="{{ url('image/contoh-akta.png') }}" alt="Akta Notaris" class="card-img-top centered-img" style="max-width: 600px;">
           </div>
          </div>
-
-
 
          <div class="carousel-item">
           <div class="text-center">
@@ -365,39 +363,148 @@
           </div>
 
           <!-- Participants Section -->
-          <h4 class="text-center mt-4">Pemilihan Putri Pasundan Bulan Oktober</h4>
+          <h4 class="text-center mt-4 mb-5">Pemilihan Putri Pasundan Bulan Oktober</h4>
           <div class="row">
             <!-- Participant 1 -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="{{ url('image/participant1.png') }}" alt="Nama Peserta" class="card-img-top mx-auto centered-img" style="max-width: 40%; height: auto;">
-                <div class="card-body">
-                  <p class="card-text">Nama Peserta</p>
-                  <button class="btn btn-primary" style="background-color: #6C2EA7; border: none;" data-bs-toggle="modal" data-bs-target="#allContestantsModal">VOTE</button>
-                </div>
-              </div>
-            </div>
-            <!-- Participant 2 -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="{{ url('image/participant2.png') }}" alt="Nama Peserta" class="card-img-top mx-auto centered-img" style="max-width: 40%; height: auto;">
-                <div class="card-body">
-                  <p class="card-text">Nama Peserta</p>
-                  <button class="btn btn-primary" style="background-color: #6C2EA7; border: none;" data-bs-toggle="modal" data-bs-target="#allContestantsModal">VOTE</button>
-                </div>
-              </div>
-            </div>
-            <!-- Participant 3 -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="{{ url('image/participant2.png') }}" alt="Nama Peserta" class="card-img-top mx-auto centered-img" style="max-width: 40%; height: auto;">
-                <div class="card-body">
-                  <p class="card-text">Nama Peserta</p>
-                  <button class="btn btn-primary" style="background-color: #6C2EA7; border: none;" data-bs-toggle="modal" data-bs-target="#allContestantsModal">VOTE</button>
-                </div>
-              </div>
-            </div>
+            @foreach ($kandidat as $item)
+                    @if ($item->approve == 'Terima')
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ asset('storage/' . $item->foto_kandidat) }}" class="card-img-top" alt="Nama Peserta 1">
+                            <div class="card-body text-center">
+                                <h5 class="card-title ">{{$item->nama_kandidat}}</h5>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">
+                                    Vote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" aria-labelledby="userDetailModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="userDetailModalLabel">Detail Peserta</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body ">
+                                    <!-- Profile Image -->
+                                    <img src="{{ asset('storage/' . $item->foto_kandidat) }}" class="card-img-top" alt="Nama Peserta 1">
+                                    <!-- User Details Table -->
+                                    <h5 class="mt-3 text-center">{{$item->nama_kandidat}}</h5>
+                                    <div class="container">
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Bulan</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->Bulan}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Tahun</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->tahun}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Pendidikan</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->pendidikan}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Pekerjaan</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->pekerjaan}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Tinggi Badan</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->tinggi_badan}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Berat Badan</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->berat_badan}}
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col mb-2">
+                                            <p class="fs-6 fw-bold mb-0">Email</p>
+                                          </div>
+                                          <div class="col">
+                                            {{$item->email}}
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                          <div class="col text-center">
+                                            <p class="fs-6 fw-bold mb-0">Penguasaan</p>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                          <div class="col">
+                                            <p class="fs-6 fw-bold mb-0">Bahasa Sunda</p>
+                                            <p class="fs-6  mb-0">{{$item->bahasa}}</p>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                          <div class="col">
+                                            <p class="fs-6 fw-bold mb-0">Kebudayaan Sunda</p>
+                                            <p class="fs-6  mb-0">{{$item->kebudayaan}}</p>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                          <div class="col">
+                                            <p class="fs-6 fw-bold mb-0">Musik Sunda</p>
+                                            <p class="fs-6  mb-0">{{$item->musik}}</p>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                          <div class="col">
+                                            <p class="fs-6 fw-bold mb-0">Pengetahuan Sejarah Sunda</p>
+                                            <p class="fs-6  mb-0">{{$item->pengetahuan}}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <form action="{{ route('user.Prosesvote', $item->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Vote</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    @endif
+                    
+                @endforeach
           </div>
+          <h5 class="mt-3">ANDAKAH PUTRI PASUNDAN ITU?</h5>
+          <p>Bila anda terlahir dari salah seorang tua berdarah sunda, baik ayah maupun ibu,</p>
+          <p>Bila anda terlahir dan tinggal di tanah pasundan tercinta,</p>
+          <p>Bila anda menghabiskan lebih dari setengah usia anda di tataran pasundan,</p>
+          <p>Bila anda mengeyam pendidikan, salah satu jenjang pendidikan berikut, SMA, D3, S1, S2, di tanah pasundan,</p>
+          <p>Bila anda memahami dan menguasai bahasa sunda, musik sunda, sejarah sunda, budaya sunda, dengan baik,</p>
+          <p>Ikut <strong>DUTA YAYASAN GITA CAHAYA KARSA PUTRI PASUNDAN</strong>....</p>
+          <p>dan dapatkan, bingkisan penghargaan kami yang menarik, dari mulai seperangkat alat sholat, kesempatan kursus memasak, kursus kecantikan, kursus menjahit, kursus kepribadian, alat rias rumah tangga, hingga kesempatan umroh * (syarat dan ketentuan berlaku)</p>
+          <p>Putri Pasundan yang terpilih berdasarkan penilaian masyarakat luas pengunjung website <a href="http://www.gitacahayakarsapp.com">www.gitacahayakarsapp.com</a></p>
+          <p>Daftar segera dengan mengirimkan data diri anda dengan format pendaftaran</p>
+          <p><a href= "{{route('kandidat.dashboard')}}" >(klik disini)</a></p>
+          <p>Salam hormat dan sayang,</p>
+          <p><strong>GITA SEKAR CINDEWANGI</strong></p>
         </div>
       </div>
     </div>
@@ -461,7 +568,7 @@
       <!-- Repeat this col-md-4 for each gallery item -->
       <div class="col-md-4 gallery-item">
         <div class="card">
-          <img src="image/program3.png" alt="Gallery Item" class="card-img-top">
+          <img src="image/program3.png" alt="Gallery Item" class="card-img-top" title="hover">
         </div>
       </div>
       <!-- Copy above divs for each image -->
@@ -739,80 +846,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Contestant 2 -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="image/participant2.png" class="card-img-top" alt="Nama Peserta 2">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama Peserta</h5>
-                                        <button type="button" class="btn btn-primary">Vote</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Contestant 3 -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="image/participant1.png" class="card-img-top" alt="Nama Peserta 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama Peserta</h5>
-                                        <button type="button" class="btn btn-primary">Vote</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Contestant 4 -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="image/participant2.png" class="card-img-top" alt="Nama Peserta 4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama Peserta</h5>
-                                        <button type="button" class="btn btn-primary">Vote</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Contestant 5 -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="image/participant2.png" class="card-img-top" alt="Nama Peserta 5">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama Peserta</h5>
-                                        <button type="button" class="btn btn-primary">Vote</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Contestant 6 -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="image/participant2.png" class="card-img-top" alt="Nama Peserta 6">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nama Peserta</h5>
-                                        <button type="button" class="btn btn-primary">Vote</button>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
-                    <h5 class="modal-title" id="putriPasundanLabel">ANDAKAH PUTRI PASUNDAN ITU?</h5>
-                    <p>Bila anda terlahir dari salah seorang tua berdarah sunda, baik ayah maupun ibu,</p>
-                    <p>Bila anda terlahir dan tinggal di tanah pasundan tercinta,</p>
-                    <p>Bila anda menghabiskan lebih dari setengah usia anda di tataran pasundan,</p>
-                    <p>Bila anda mengeyam pendidikan, salah satu jenjang pendidikan berikut, s ma, D3, S1, S2, di tanah pasundan,</p>
-                    <p>Bila anda memahami dan menguasai bahasa sunda, musik sunda, sejarah sunda, budaya sunda, dengan baik,</p>
-                    
-                    <p>Ikut <strong>DUTA YAYASAN GITA CAHAYA KARSA PUTRI PASUNDAN</strong>....</p>
-                    
-                    <p>dan dapatkan, bingkisan penghargaan kami yang menarik, dari mulai seperangkat alat sholat, kesempatan kursus memasak, kursus kecantikan, kursus menjahit, kursus kepribadian, alat rias rumah tangga, hingga kesempatan umroh * (syarat dan ketentuan berlaku)</p>
-                    
-                    <p>Putri Pasundan yang terpilih berdasarkan penilaian masyarakat luas pengunjung website <a href="http://www.gitacahayakarsapp.com">www.gitacahayakarsapp.com</a></p>
-
-                    <p>Daftar segera dengan mengirimkan data diri anda dengan format pendaftaran</p>
-                    <p><a href= "#" >(klik disini)</a> kirim melalui email <a href="mailto:yayasangitacahayakarsa@gmail.com">yayasangitacahayakarsa@gmail.com</a></p>
-                    <p>Salam hormat dan sayang,</p>
-                    <p><strong>GITA SEKAR CINDEWANGI</strong></p>
                 </div>
                 <div class="modal-footer">
                    

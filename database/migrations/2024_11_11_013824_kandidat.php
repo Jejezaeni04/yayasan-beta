@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('kandidats', function (Blueprint $table) {
             $table->id('id'); // Auto incrementing primary key
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('votes_count')->default(0);
             $table->string('bulan', 100);
             $table->string('tahun', 100);
             $table->string('nama_kandidat', 100);
@@ -28,6 +30,9 @@ return new class extends Migration
             $table->string('pengetahuan', 25);
             $table->enum('approve', ['Proces', 'Tolak', 'Terima'])->default('Proces'); // ENUM column with default value
             $table->timestamps(); // Creates created_at and updated_at fields
+
+            $table->unique(['user_id']);
+
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\galerController;
 use App\Http\Controllers\admin\kontenController;
@@ -8,10 +9,12 @@ use App\Http\Controllers\admin\programController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\kandidatController;
+use App\Http\Controllers\kandidat\kandidatController;
 use App\Http\Controllers\landingpageController;
 use App\Http\Controllers\user\UserHomeController;
+use App\Http\Controllers\user\VoteController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\KandidatMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +26,13 @@ Route::controller(landingpageController::class)->group(function() {
 // Admin Routes with AdminMiddleware and Email Verification
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function() {
+
+        Route::controller(AdminHomeController::class)->group(function() {
+            Route::get('/homeKandidat', 'indexKandidat')->name('homeKandidat');
+            Route::post('/kandidat/{id}/accept', [AdminHomeController::class, 'accept'])->name('kandidat.accept');
+            Route::post('/kandidat/{id}/reject', [AdminHomeController::class, 'reject'])->name('kandidat.reject');
+
+        });
 
         // Program Controller Routes
         Route::controller(programController::class)->group(function() {
@@ -77,8 +87,23 @@ Route::prefix('user')->name('user.')->group(function() {
     Route::middleware(['auth', 'verified', UserMiddleware::class])->group(function() {
         Route::controller(UserHomeController::class)->group(function(){
             Route::get('/dashboard', 'index')->name('dashboard');
-            Route::get('/vote', 'vote')->name('vote');
             Route::get('/kandidat', 'kandidat')->name('kandidat');
+        });
+        Route::controller(VoteController::class)->group(function(){
+            Route::get('/voteHome', 'voteHome')->name('voteHome');
+            Route::post('/Prosesvote/{id}/vote', 'vote')->name('Prosesvote');
+            Route::get('/vote/{id}/delete',  'deleteVote')->name('voteDelete');
+
+
+        });
+    });
+});
+Route::prefix('kandidat')->name('kandidat.')->group(function() {
+    Route::middleware(['auth', 'verified', KandidatMiddleware::class])->group(function() {
+        Route::controller(KandidatController::class)->group(function(){
+            Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('/daftar', 'addKandidat')->name('daftar');
+            Route::post('/simpanKandidat', 'store')->name('kandidatStore');
         });
     });
 });

@@ -12,3 +12,29 @@
     height: 2px; /* Height of the underline */
     background-color: #ffff; /* Color of the underline */
 }
+
+.modal-header {
+    border-bottom: none;
+}
+.modal-body img {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+.details-table {
+    width: 100%;
+    margin-top: 20px;
+}
+.details-table th,
+.details-table td {
+    padding: 8px;
+    vertical-align: top;
+}
+.details-table th {
+    text-align: left;
+    width: 35%;
+}
+.details-table td {
+    text-align: left;
+}

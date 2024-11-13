@@ -25,11 +25,11 @@
                 <h2>Sign In</h2>
             </a>
           </div>
-          <button class="btn google-button w-100">
+          {{-- <button class="btn google-button w-100">
             <img src="{{url('image/google.png')}}" alt="Google" width="20">
             Daftar dengan Google
           </button>
-          <p>atau masuk dengan email Anda</p>
+          <p>atau masuk dengan email Anda</p> --}}
           
           <!-- Form -->
           <form method="POST" action="{{ route('login') }}">

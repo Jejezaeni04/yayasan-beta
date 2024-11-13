@@ -26,22 +26,26 @@
         <div class="list-group">
             <!-- Card Item 1 -->
 
-            <div class="list-group-item d-flex align-items-center p-3 border rounded mb-3">
-                <img src="https://via.placeholder.com/80" alt="Nama Peserta" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-                <div class="flex-grow-1">
-                    <h6 class="m-0">Nama Peserta</h6>
-                    <small class="text-muted">Putri Pasundan Bulan Agustus 2024</small>
-                </div>
+            @foreach ($votes as $vote)
+                <div class="list-group-item d-flex align-items-center p-3 border rounded mb-3">
+                    <img src="{{ asset('storage/' . $vote->kandidat->foto_kandidat) }}" alt="{{ $vote->kandidat->nama_kandidat }}" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                        <h6 class="m-0">{{ $vote->kandidat->nama_kandidat }}</h6>
+                        <small class="text-muted">Putri Pasundan Bulan {{ $vote->kandidat->bulan }} {{ $vote->kandidat->tahun }}</small>
+                    </div>
 
-                <div class="dropdown">
-                    <button class="btn btn-secondary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-heart fs-5"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Hapus Vote?</a></li>     
-                    </ul>
-                  </div>
-            </div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-heart fs-5"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('user.voteDelete', $vote->id) }}" onclick="return confirm('Hapus vote ini?')">Hapus Vote?</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            @endforeach
 
             <!-- Add more items as needed -->
         </div>

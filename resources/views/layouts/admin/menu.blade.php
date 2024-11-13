@@ -60,20 +60,20 @@
                             <p class=" ml-3 fw-bold" >Manajemen Pembayaran</p>
                         </a>
                     </li>
-                    <li class="{{ (Route::is('admin.kandidat')) ? 'list-active' : ''}}">
-                        <a href="{{route('admin.kandidat')}}" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('admin.homeKandidat')) ? 'list-active' : ''}}">
+                        <a href="{{route('admin.homeKandidat')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/hire-white.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Kandidat</p>
                         </a>
                     </li>
                     <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
+                        <a href="" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Vote</p>
                         </a>
                     </li>
                     <li class="">
-                        <a href="../examples/dashboard.html" class="d-flex align-items-center">
+                        <a href="" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/setting.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Pengaturan</p>
                         </a>
