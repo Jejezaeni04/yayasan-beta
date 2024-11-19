@@ -11,8 +11,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    base: './', // Use relative paths if needed
-    build: {
-        outDir: 'dist', // Default build output folder
-    },
 });
