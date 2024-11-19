@@ -29,22 +29,23 @@
         </div>
         <div class="container d-flex justify-content-center">
           <div class="card mb-3 p-4" style="max-width: 75%;">
-            <form action="{{route('kandidat.kandidatStore')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('kandidat.updatekandidat',$kandidat->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
     
                 <!-- Basic Information Fields -->
                 <div class="mb-3">
-                    <label for="bulan" class="form-label">Bulan Daftar</label>
-                    <input type="text" class="form-control" id="bulan" name="bulan" value="{{ old('bulan') }}" readonly required>
+                    <label for="bulan" class="form-label">Bulan</label>
+                    <input type="text" class="form-control" id="bulan" name="bulan" value="{{ old('bulan',$kandidat->bulan) }}" required>
                     @error('bulan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
     
                 <div class="mb-3">
-                    <label for="tahun" class="form-label">Tahun Daftar</label>
-                    <input type="text" class="form-control" id="tahun" name="tahun" value="{{ old('tahun') }}" readonly required>
-                    <input type="text" class="form-control"  name="user_id" value="{{ auth()->user()->id }}" required hidden>
+                    <label for="tahun" class="form-label">Tahun</label>
+                    <input type="text" class="form-control" id="tahun" name="tahun" value="{{ old('tahun',$kandidat->tahun) }}" required>
+                    <input type="text" class="form-control" id="tahun" name="user_id" value="{{ auth()->user()->id }}" required hidden>
                     @error('tahun')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -55,7 +56,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email',$kandidat->email) }}" required disabled>
                     @error('email')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -63,7 +64,7 @@
                 
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="nama_kandidat" id="nama_kandidat" value="{{ old('nama_kandidat') }}" required>
+                    <input type="text" class="form-control" name="nama_kandidat" id="nama_kandidat" value="{{ old('nama_kandidat',$kandidat->nama_kandidat) }}" required>
                     @error('nama_kandidat')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -71,7 +72,7 @@
     
                 <div class="mb-3">
                     <label for="pendidikan" class="form-label">Pendidikan</label>
-                    <input type="text" class="form-control" name="pendidikan" id="pendidikan" value="{{ old('pendidikan') }}" required>
+                    <input type="text" class="form-control" name="pendidikan" id="pendidikan" value="{{ old('pendidikan',$kandidat->pendidikan) }}" required>
                     @error('pendidikan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -79,7 +80,7 @@
     
                 <div class="mb-3">
                     <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                    <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="{{ old('pekerjaan') }}" required>
+                    <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="{{ old('pekerjaan',$kandidat->pekerjaan) }}" required>
                     @error('pekerjaan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -87,7 +88,7 @@
     
                 <div class="mb-3">
                     <label for="tinggiBadan" class="form-label">Tinggi Badan (cm)</label>
-                    <input type="text" class="form-control" name="tinggi_badan" id="tinggiBadan" value="{{ old('tinggi_badan') }}" required>
+                    <input type="text" class="form-control" name="tinggi_badan" id="tinggiBadan" value="{{ old('tinggi_badan',$kandidat->tinggi_badan) }}" required>
                     @error('tinggi_badan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -95,7 +96,7 @@
     
                 <div class="mb-3">
                     <label for="beratBadan" class="form-label">Berat Badan (kg)</label>
-                    <input type="text" class="form-control" name="berat_badan" id="beratBadan" value="{{ old('berat_badan') }}" required>
+                    <input type="text" class="form-control" name="berat_badan" id="beratBadan" value="{{ old('berat_badan',$kandidat->berat_badan) }}" required>
                     @error('berat_badan')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -103,7 +104,7 @@
 
                 <div class="mb-3">
                     <label for="foto_kandidat" class="form-label">Foto</label>
-                    <input type="file" class="form-control" name="foto_kandidat" id="beratBadan" value="{{ old('foto_kandidat') }}" required>
+                    <input type="file" class="form-control" name="foto_kandidat" id="beratBadan" value="{{ old('foto_kandidat',$kandidat->foto_kanddidat) }}" >
                     @error('foto_kandidat')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -113,34 +114,38 @@
                 <div class="mb-3">
                     <label class="form-label">Penguasaan Bahasa Sunda</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaKurangPaham" value="Kurang Paham" required>
+                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaKurangPaham" value="Kurang Paham" 
+                               {{ old('bahasa', $kandidat->bahasa ?? '') == 'Kurang Paham' ? 'checked' : '' }} required>
                         <label class="form-check-label" for="bahasaKurangPaham">Kurang Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaPaham" value="Paham">
+                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaPaham" value="Paham" 
+                               {{ old('bahasa', $kandidat->bahasa ?? '') == 'Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="bahasaPaham">Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaFasih" value="Fasih">
+                        <input class="form-check-input" type="radio" name="bahasa" id="bahasaFasih" value="Fasih" 
+                               {{ old('bahasa', $kandidat->bahasa ?? '') == 'Fasih' ? 'checked' : '' }}>
                         <label class="form-check-label" for="bahasaFasih">Fasih</label>
                     </div>
                     @error('bahasa')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                
     
                 <div class="mb-3">
                     <label class="form-label">Kebudayaan Sunda</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanKurangPaham" value="Kurang Paham" required>
+                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanKurangPaham" value="Kurang Paham" {{ old('kebudayaan', $kandidat->kebudayaan ?? '') == 'Kurang Paham' ? 'checked' : '' }} >
                         <label class="form-check-label" for="kebudayaanKurangPaham">Kurang Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanPaham" value="Paham">
+                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanPaham" value="Paham" {{ old('kebudayaan', $kandidat->kebudayaan ?? '') == 'Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="kebudayaanPaham">Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanSangatPaham" value="Sangat Paham">
+                        <input class="form-check-input" type="radio" name="kebudayaan" id="kebudayaanSangatPaham" value="Sangat Paham" {{ old('kebudayaan', $kandidat->kebudayaan ?? '') == 'Sangat Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="kebudayaanSangatPaham">Sangat Paham</label>
                     </div>
                     @error('kebudayaan')
@@ -151,15 +156,15 @@
                 <div class="mb-3">
                     <label class="form-label">Musik Sunda</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="musik" id="musikKurangPaham" value="Kurang Paham" required>
+                        <input class="form-check-input" type="radio" name="musik" id="musikKurangPaham" value="Kurang Paham" {{ old('musik', $kandidat->musik ?? '') == 'Kurang Paham' ? 'checked' : '' }} >
                         <label class="form-check-label" for="musikKurangPaham">Kurang Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="musik" id="musikPaham" value="Paham">
+                        <input class="form-check-input" type="radio" name="musik" id="musikPaham" value="Paham" {{ old('musik', $kandidat->musik ?? '') == 'Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="musikPaham">Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="musik" id="musikSangatPaham" value="Sangat Paham">
+                        <input class="form-check-input" type="radio" name="musik" id="musikSangatPaham" value="Sangat Paham" {{ old('musik', $kandidat->musik ?? '') == 'Sangat Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="musikSangatPaham">Sangat Paham</label>
                     </div>
                     @error('musik')
@@ -170,15 +175,15 @@
                 <div class="mb-3">
                     <label class="form-label">Pengetahuan Sejarah Sunda</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahKurangPaham" value="Kurang Paham" required>
+                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahKurangPaham" value="Kurang Paham" {{ old('pengetahuan', $kandidat->pengetahuan ?? '') == 'Kurang Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="sejarahKurangPaham">Kurang Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahPaham" value="Paham">
+                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahPaham" value="Paham" {{ old('pengetahuan', $kandidat->pengetahuan ?? '') == 'Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="sejarahPaham">Paham</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahSangatPaham" value="Sangat Paham">
+                        <input class="form-check-input" type="radio" name="pengetahuan" id="sejarahSangatPaham" value="Sangat Paham" {{ old('pengetahuan', $kandidat->pengetahuan ?? '') == 'Sangat Paham' ? 'checked' : '' }}>
                         <label class="form-check-label" for="sejarahSangatPaham">Sangat Paham</label>
                     </div>
                     @error('pengetahuan')
@@ -186,56 +191,13 @@
                     @enderror
                 </div>
     
-                <!-- Media Instructions -->
-                <div class="mb-3">
-                    <p><strong>Media</strong></p>
-                    <ol>
-                        <li>Foto terbaik Anda mengenakan busana kebaya</li>
-                        <li>Video perkenalan diri dengan minimal durasi 15 detik</li>
-                    </ol>
-                    <p>Daftar segera dengan mengirimkan data diri anda dengan format pendaftaran</p>
-                     kirim melalui email <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yayasangitacahayakarsa@gmail.com&su=Halo%20Yayasan&body=Daftar%20Kandidat%20Gita%20Cahaya%20Karsa,%0AKirimkan%20vidio%20perkenalan%20diri%20anda%0ANama%20Lengkap%20Anda%20:%20" 
-                     target="_blank" 
-                     onclick="alert('Email form telah terbuka. Silakan kirim email Anda, lalu kembali ke halaman ini untuk melanjutkan pendaftaran.');">
-                      Klik Untuk Mengirim Vidio Perkenalan Anda
-                  </a>
-                  
-                    </p>
-                    <p>Salam hormat dan sayang,</p>
-                    <p><strong>GITA SEKAR CINDEWANGI</strong></p>
-                    
-                </div>
-    
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary mt-3">Daftar</button>
+                <button type="submit" class="btn btn-primary mt-3">Ubah Data</button>
             </form>
           </div>
       </div>
     </div>
 </div>
-
-<script>
-   // Mendapatkan tanggal sekarang
-   const now = new Date();
-    // Array nama bulan
-    const bulanNama = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-    // Ambil nama bulan sekarang
-    const bulanSekarang = bulanNama[now.getMonth()];
-    // Set nilai input
-    const bulanInput = document.getElementById('bulan');
-    if (!bulanInput.value) { // Jika tidak ada nilai lama dari Laravel
-        bulanInput.value = bulanSekarang;
-    }
-
-    const tahunSekarang = now.getFullYear();
-    const tahunInput = document.getElementById('tahun');
-    if (!tahunInput.value) { // Jika tidak ada nilai lama dari Laravel
-        tahunInput.value = tahunSekarang;
-        }
-</script>
 
 <script>
     // Ensure the checkbox behavior works when toggled

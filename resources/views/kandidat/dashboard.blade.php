@@ -32,28 +32,35 @@
         </div>
     </div>
   
-    <div class="container">
+    <div class="container my-4">
         <body>
             @foreach ($kandidat as $item)
-            <h1>Status Pendaftaran Anda : {{$item->approve}}</h1>
-            <p>Terima kasih telah mendaftar sebagai kandidat. Berikut adalah informasi yang Anda masukkan:</p>
-            <ul>
-                    
-                <li><strong>Nama : </strong>{{$item->nama_kandidat}} </li>
-                <li><strong>Pendidikan : </strong>{{$item->pendidikan}}</li>
-                <li><strong>Pekerjaan : </strong>{{$item->pekerjaan}}</li>
-                <li><strong>Tinggi Badan : </strong> {{$item->tinggi_badan}} cm</li>
-                <li><strong>Berat Badan : </strong> {{$item->berat_badan}} kg</li>
-                <li><strong>Penguasaan Bahasa Sunda : </strong>{{$item->bahasa}}</li>
-                <li><strong>Kebudayaan Sunda : </strong>{{$item->kebudayaan}}</li>
-                <li><strong>Musik Sunda : </strong>{{$item->musik}}</li>
-                <li><strong>Pengetahuan Sejarah Sunda : </strong>{{$item->pengetahuan}}</li>
-            </ul>
-            <p>Selamat atas pendaftaran Anda!</p>
+            <div class="row align-items-start mb-4">
+                <div class="col-md-8">
+                    <h1>Status Pendaftaran Anda : {{$item->approve}}</h1>
+                    <p>Terima kasih telah mendaftar sebagai kandidat. Berikut adalah informasi yang Anda masukkan:</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Nama :</strong> {{$item->nama_kandidat}}</li>
+                        <li><strong>Pendidikan :</strong> {{$item->pendidikan}}</li>
+                        <li><strong>Pekerjaan :</strong> {{$item->pekerjaan}}</li>
+                        <li><strong>Tinggi Badan :</strong> {{$item->tinggi_badan}} cm</li>
+                        <li><strong>Berat Badan :</strong> {{$item->berat_badan}} kg</li>
+                        <li><strong>Penguasaan Bahasa Sunda :</strong> {{$item->bahasa}}</li>
+                        <li><strong>Kebudayaan Sunda :</strong> {{$item->kebudayaan}}</li>
+                        <li><strong>Musik Sunda :</strong> {{$item->musik}}</li>
+                        <li><strong>Pengetahuan Sejarah Sunda :</strong> {{$item->pengetahuan}}</li>
+                    </ul>
+                    <p>Selamat atas pendaftaran Anda!</p>
+                    <a href="{{route('kandidat.editKandidat',$item->id)}}" class="btn btn-primary">edit data</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <!-- Display kandidat's image here -->
+                    <img src="{{ asset('storage/' . $item->foto_kandidat) }}" alt="Foto Kandidat" class="img-fluid rounded" width="200">
+                </div>
+            </div>
             @endforeach
-        
         </body>
-
     </div>
+    
 </div>
 @endsection

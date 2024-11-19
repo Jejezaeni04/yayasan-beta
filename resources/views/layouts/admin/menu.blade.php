@@ -66,8 +66,8 @@
                             <p class=" ml-3 fw-bold" >Manajemen Kandidat</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="" class="d-flex align-items-center">
+                    <li class="{{ (Route::is('admin.homeVote')) ? 'list-active' : ''}}">
+                        <a href="{{route('admin.homeVote')}}" class="d-flex align-items-center">
                             <img src="{{ url('image/icons/vote.png') }}" alt="" class="ml-2" style="width: 24px; height: 24px;">
                             <p class=" ml-3 fw-bold" >Manajemen Vote</p>
                         </a>

@@ -44,8 +44,8 @@
                         <label for="judulKonten" class="form-label fw-bold text-dark">Judul</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control @error('judulKonten') is-invalid @enderror" id="judulKonten" name="judulKonten" value="{{ old('judulKonten', $konten->judulKonten) }}" placeholder="Masukkan judul">
-                        @error('judulKonten')
+                        <input type="text" class="form-control @error('judulkonten') is-invalid @enderror" id="judulKonten" name="judulkonten" value="{{ old('judulkonten', $konten->judulkonten) }}" placeholder="Masukkan judul">
+                        @error('judulkonten')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

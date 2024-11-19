@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\AdminHomeController;
-use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\galerController;
 use App\Http\Controllers\admin\kontenController;
 use App\Http\Controllers\admin\pembayaranController;
 use App\Http\Controllers\admin\programController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\admin\homeVoteController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\kandidat\kandidatController;
@@ -80,6 +80,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/addKandidat', 'addKandidat')->name('addKandidat');
             Route::post('/simpanKandidat', 'store')->name('kandidatStore');
         });
+
+        //Vote Controller Routes
+        Route::controller(homeVoteController::class)->group(function(){
+            Route::get('/vote', 'homeVote')->name('homeVote');
+        });
     });
 });
 
@@ -104,6 +109,8 @@ Route::prefix('kandidat')->name('kandidat.')->group(function() {
             Route::get('/dashboard', 'index')->name('dashboard');
             Route::get('/daftar', 'addKandidat')->name('daftar');
             Route::post('/simpanKandidat', 'store')->name('kandidatStore');
+            Route::get('/editKandidat/{id}', 'editKandidat')->name('editKandidat');
+            Route::put('/updateKandidat/{id}', 'update')->name('updatekandidat');
         });
     });
 });
@@ -115,3 +122,7 @@ Auth::routes(['verify' => true]);
 
 // User Dashboard Route with UserMiddleware and Email Verification
 Route::get('/dashboard', [HomeController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

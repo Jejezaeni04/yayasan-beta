@@ -53,10 +53,10 @@
             <tr>
               <td>
                 <div class="d-flex justify-content-center align-items-center">
-                  <img src="{{ asset('storage/' . $item->fotoKonten) }}" alt="{{ $item->judulKonten }}" alt="Program 1" width="100">
+                  <img src="{{ asset('storage/' . $item->fotoKonten) }}" alt="{{ $item->judulkonten }}" alt="Program 1" width="100">
                 </div>
               </td>
-              <td>{{ $item->judulKonten }}</td>
+              <td>{{ $item->judulkonten }}</td>
               <td>
                 <div class="d-flex justify-content-center align-items-center">
                   <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">
@@ -77,7 +77,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="detailModalLabel">{{$item->judulKonten}}</h5>
+                            <h5 class="modal-title" id="detailModalLabel">{{$item->judulkonten}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

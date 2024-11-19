@@ -37,7 +37,7 @@ class kontenController extends Controller
 
     // Buat konten baru
         Konten::create([
-            'judulKonten' => $request->judulKonten,
+            'judulkonten' => $request->judulkonten,
             'fotoKonten' => $path,
             'detailKonten' => $request->detailKonten,
         ]);
@@ -53,7 +53,7 @@ class kontenController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'judulKonten' => 'sometimes|required|string|max:100',
+            'judulkonten' => 'sometimes|required|string|max:100',
             'fotoKonten' => 'sometimes|image|max:2048', // validasi untuk foto
             'detailkonten' => 'sometimes|required|string',
         ]);
@@ -69,7 +69,7 @@ class kontenController extends Controller
             $konten->fotoKonten = $path;
         }
 
-        $konten->judulKonten = $request->judulKonten ?? $konten->judulKonten;
+        $konten->judulkonten = $request->judulkonten ?? $konten->judulkonten;
         $konten->detailKonten = $request->detailKonten ?? $konten->detailKonten;
         $konten->save();
 
