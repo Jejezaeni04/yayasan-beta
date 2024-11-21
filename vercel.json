@@ -8,6 +8,15 @@
         { "src": "/build/(.*)", "dest": "/public/build/" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
+    "builds": [
+    {
+      "src": "api/*.php",
+      "use": "@vercel/php",
+      "config": {
+        "installCommand": "apk add --no-cache libssl1.0 && composer install"
+      }
+    }
+  ],
     "public": true,
     "buildCommand": "vite build",
     "outputDirectory": "public",
