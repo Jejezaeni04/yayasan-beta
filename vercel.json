@@ -5,18 +5,18 @@
         "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
     "routes": [
-        { "src": "/build/(.*)", "dest": "/public/build/" },
+        { "src": "/build/(.*)", "dest": "/public/build/$1" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "builds": [
-    {
-      "src": "api/*.php",
-      "use": "@vercel/php",
-      "config": {
-        "installCommand": "apk add --no-cache libssl1.0 && composer install"
-      }
-    }
-  ],
+        {
+            "src": "api/*.php",
+            "use": "@vercel/php",
+            "config": {
+                "installCommand": "apt-get update && apt-get install -y libssl1.0 && composer install"
+            }
+        }
+    ],
     "public": true,
     "buildCommand": "vite build",
     "outputDirectory": "public",
