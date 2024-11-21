@@ -1,1 +1,4 @@
 /vendor
+/api/index.php
+/public/
+/package.json
